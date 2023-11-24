@@ -6,42 +6,45 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Recipe App',
+      title: 'Car Sharing App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: RecipeListScreen(),
+      home: CarListScreen(),
     );
   }
 }
 
-class RecipeListScreen extends StatelessWidget {
-  final List<String> recipes = [
-    'Паста карбонара',
-    'Салат Цезарь',
-    'Греческий салат',
-    'Борщ',
-    'Суп-гуляш',
-    // Добавьте свои рецепты
+class CarListScreen extends StatelessWidget {
+  final List<String> cars = [
+    'Toyota Prius',
+    'Honda Civic',
+    'Ford Focus',
+    'Chevrolet Malibu',
+    'Volkswagen Passat',
+    // Добавьте свои автомобили
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Список рецептов'),
+        title: Text('Список автомобилей'),
       ),
       body: ListView.builder(
-        itemCount: recipes.length,
+        itemCount: cars.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(recipes[index]),
+            title: Text(cars[index]),
+            subtitle: Text('Гос. номер: ABC123'),
+            leading: Icon(Icons.directions_car),
             onTap: () {
+              // Добавьте обработчик нажатия для перехода к экрану с деталями автомобиля
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => RecipeDetailScreen(recipeName: recipes[index]),
+                  builder: (context) => CarDetailScreen(carName: cars[index]),
                 ),
               );
             },
@@ -52,22 +55,38 @@ class RecipeListScreen extends StatelessWidget {
   }
 }
 
-class RecipeDetailScreen extends StatelessWidget {
-  final String recipeName;
+class CarDetailScreen extends StatelessWidget {
+  final String carName;
 
-  RecipeDetailScreen({required this.recipeName});
+  CarDetailScreen({required this.carName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(recipeName),
+        title: Text(carName),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Text(
-          'Здесь будет подробная информация о рецепте "$recipeName".',
-          style: TextStyle(fontSize: 18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Модель: $carName',
+              style: TextStyle(fontSize: 18.0),
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              'Гос. номер: ABC123',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              'Год выпуска: 2022',
+              style: TextStyle(fontSize: 16.0),
+            ),
+            // Добавьте больше информации о автомобиле по мере необходимости
+          ],
         ),
       ),
     );
