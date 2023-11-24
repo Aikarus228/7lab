@@ -6,45 +6,45 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Car Sharing App',
+      title: 'Bookstore App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CarListScreen(),
+      home: BookListScreen(),
     );
   }
 }
 
-class CarListScreen extends StatelessWidget {
-  final List<String> cars = [
-    'Toyota Prius',
-    'Honda Civic',
-    'Ford Focus',
-    'Chevrolet Malibu',
-    'Volkswagen Passat',
-    // Добавьте свои автомобили
+class BookListScreen extends StatelessWidget {
+  final List<String> books = [
+    'Дюна - Фрэнк Герберт',
+    '1984 - Джордж Оруэлл',
+    'Мастер и Маргарита - Михаил Булгаков',
+    'Властелин колец - Дж. Р. Р. Толкин',
+    'Гарри Поттер и философский камень - Дж. К. Роулинг',
+    // Добавьте свои книги
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Список автомобилей'),
+        title: Text('Список книг'),
       ),
       body: ListView.builder(
-        itemCount: cars.length,
+        itemCount: books.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(cars[index]),
-            subtitle: Text('Гос. номер: ABC123'),
-            leading: Icon(Icons.directions_car),
+            title: Text(books[index]),
+            subtitle: Text('Автор: Неизвестен'),
+            leading: Icon(Icons.book),
             onTap: () {
-              // Добавьте обработчик нажатия для перехода к экрану с деталями автомобиля
+              // Добавьте обработчик нажатия для перехода к экрану с деталями книги
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CarDetailScreen(carName: cars[index]),
+                  builder: (context) => BookDetailScreen(bookTitle: books[index]),
                 ),
               );
             },
@@ -55,16 +55,16 @@ class CarListScreen extends StatelessWidget {
   }
 }
 
-class CarDetailScreen extends StatelessWidget {
-  final String carName;
+class BookDetailScreen extends StatelessWidget {
+  final String bookTitle;
 
-  CarDetailScreen({required this.carName});
+  BookDetailScreen({required this.bookTitle});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(carName),
+        title: Text(bookTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -72,20 +72,20 @@ class CarDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Модель: $carName',
+              'Название: $bookTitle',
               style: TextStyle(fontSize: 18.0),
             ),
             SizedBox(height: 8.0),
             Text(
-              'Гос. номер: ABC123',
+              'Автор: Неизвестен',
               style: TextStyle(fontSize: 16.0),
             ),
             SizedBox(height: 8.0),
             Text(
-              'Год выпуска: 2022',
+              'Жанр: Фантастика',
               style: TextStyle(fontSize: 16.0),
             ),
-            // Добавьте больше информации о автомобиле по мере необходимости
+            // Добавьте больше информации о книге по мере необходимости
           ],
         ),
       ),
